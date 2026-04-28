@@ -56,7 +56,7 @@ export function About() {
               <div className="relative bg-card border border-border rounded-2xl p-8">
                 <h3 className="text-2xl mb-4">Engineering Excellence</h3>
                 <p className="text-muted-foreground mb-4">
-                  With over 8 years of experience building production systems at scale, I specialize in
+                  With over 5 years of experience building production systems at scale, I specialize in
                   architecting resilient, high-performance applications that serve millions of users.
                 </p>
                 <p className="text-muted-foreground mb-4">
