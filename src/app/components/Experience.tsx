@@ -3,23 +3,24 @@ import { Briefcase, TrendingUp } from 'lucide-react';
 
 const experiences = [
   {
-    role: 'Senior Full-Stack Engineer',
-    company: 'TechCorp Inc.',
+    role: 'Backend-Engineer Training',
+    company: 'Avatar',
     type: 'Full-time',
-    duration: '2022 - Present',
+    duration: '2026 - Present',
     achievements: [
-      'Led migration to microservices architecture, reducing deployment time by 75% and improving system resilience',
-      'Architected real-time data pipeline processing 5M events/hour with 99.99% accuracy',
-      'Mentored team of 8 engineers, establishing code review standards and architectural best practices',
-      'Reduced infrastructure costs by 40% through optimization of cloud resources and caching strategies',
+      'Palloncino Party Management System | Backend Developer Intern at Avatar',
+      'Developed a complete enterprise backend system for a party planning',
+      'company, handling orders, inventory, tasks, and delivery operations.',
+      'Tech Stack: .NET 10, C#, Entity Framework Core, SQLite, JWT, AutoMapper,',
+      'Tech Stack: .NET 10, C#, Entity Framework Core, SQLite, JWT, AutoMapper,Docker'
     ],
     gradient: 'from-blue-500 to-cyan-500',
   },
   {
     role: 'Full-Stack Developer',
-    company: 'StartupHub',
+    company: 'Mostaql.com | ‫مستقل‬',
     type: 'Full-time',
-    duration: '2020 - 2022',
+    duration: '2026-Present',
     achievements: [
       'Built customer-facing dashboard serving 50K+ users with React and .NET Core',
       'Implemented automated testing suite, increasing code coverage from 40% to 85%',
@@ -29,10 +30,10 @@ const experiences = [
     gradient: 'from-purple-500 to-pink-500',
   },
   {
-    role: 'Software Engineer',
-    company: 'Digital Solutions Ltd.',
+    role: 'Backend-Engineer-Training',
+    company: 'Dash',
     type: 'Full-time',
-    duration: '2018 - 2020',
+    duration: '2022-Present',
     achievements: [
       'Developed REST APIs and microservices handling 2M+ requests daily',
       'Introduced Docker containerization, streamlining local development and CI/CD pipeline',
@@ -40,19 +41,6 @@ const experiences = [
       'Refactored legacy codebase, improving maintainability and reducing bug count by 50%',
     ],
     gradient: 'from-green-500 to-emerald-500',
-  },
-  {
-    role: 'Junior Developer',
-    company: 'CodeCraft Agency',
-    type: 'Full-time',
-    duration: '2016 - 2018',
-    achievements: [
-      'Built responsive web applications for 10+ clients using React and Node.js',
-      'Participated in agile development process and daily standups',
-      'Contributed to internal tooling and developer documentation',
-      'Gained expertise in full-stack development and modern JavaScript ecosystem',
-    ],
-    gradient: 'from-orange-500 to-red-500',
   },
 ];
 
