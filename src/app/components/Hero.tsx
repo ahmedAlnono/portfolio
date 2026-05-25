@@ -89,7 +89,7 @@ export function Hero() {
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1, y: -2 }}
-                href="mailto:contact@example.com"
+                href="mailto:ahmed.alnono.work@gmail.com"
                 className="p-3 bg-accent hover:bg-accent/80 rounded-lg border border-border transition-colors"
               >
                 <Mail size={24} />

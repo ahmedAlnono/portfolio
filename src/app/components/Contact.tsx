@@ -60,7 +60,7 @@ export function Contact() {
                 <div className="space-y-6 mb-8">
                   <motion.a
                     whileHover={{ x: 8 }}
-                    href="mailto:contact@example.com"
+                    href="mailto:ahmed.alnono.work@gmail.com"
                     className="flex items-center gap-4 p-4 bg-accent/50 hover:bg-accent rounded-lg transition-colors group"
                   >
                     <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
@@ -68,7 +68,7 @@ export function Contact() {
                     </div>
                     <div>
                       <div className="text-sm text-muted-foreground">Email</div>
-                      <div className="group-hover:text-blue-500 transition-colors">contact@example.com</div>
+                      <div className="group-hover:text-blue-500 transition-colors">ahmed.alnono.work@gmail.com</div>
                     </div>
                   </motion.a>
 
