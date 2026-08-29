@@ -1,160 +1,190 @@
-import { motion } from 'motion/react';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { NetworkScene } from "./NetworkScene";
+import { MagneticButton } from "./MagneticButton";
+import { TypingText } from "./TypingText";
+import { lazy, Suspense } from "react";
+function useLiveMetrics() {
+  const [metrics, setMetrics] = useState({
+    rps: 42800,
+    p99: 12,
+    uptime: 99.98,
+  });
+  useEffect(() => {
+    const id = setInterval(() => {
+      setMetrics((m) => ({
+        ...m,
+        rps: m.rps + Math.round((Math.random() - 0.5) * 400),
+        p99: Math.max(8, Math.round(m.p99 + (Math.random() - 0.5) * 3)),
+      }));
+    }, 1800);
+    return () => clearInterval(id);
+  }, []);
+  return metrics;
+}
 
 export function Hero() {
+  const metrics = useLiveMetrics();
+
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-teal-500/10" />
-
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+    <section className="relative min-h-screen flex items-center bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left: content */}
+          <div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-block mb-4 px-4 py-2 bg-accent/50 backdrop-blur-sm rounded-full border border-border"
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 bg-muted rounded-full border border-border font-mono text-xs text-muted-foreground"
             >
-              <span className="text-sm text-muted-foreground">Available for new opportunities</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              available for new opportunities
             </motion.div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl mb-6 bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              className="text-5xl sm:text-6xl lg:text-7xl font-medium mb-4 text-foreground tracking-tight"
+            >
               Ahmed Alnono
-            </h1>
+            </motion.h1>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl text-muted-foreground mb-6">
-              Senior Full-Stack Developer
-            </h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl sm:text-2xl text-muted-foreground mb-6"
+            >
+              <TypingText />
+            </motion.h2>
 
-            <p className="text-lg text-muted-foreground mb-8 max-w-xl">
-              Building scalable systems with a focus on performance, clean architecture, and engineering excellence.
-              Specialized in distributed systems, real-time applications, and developer tooling.
-            </p>
-
-            <div className="flex flex-wrap gap-4 mb-8">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('projects')}
-                className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium flex items-center gap-2 shadow-lg shadow-blue-500/25"
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-lg text-muted-foreground mb-8 max-w-lg"
+            >
+              Building scalable systems with a focus on performance, clean
+              architecture, and engineering excellence — distributed systems,
+              real-time applications, and developer tooling.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="mb-8 p-4 bg-muted/50 border border-border rounded-xl max-w-lg"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                  Currently
+                </span>
+              </div>
+              <p className="text-sm text-foreground">
+                Building enterprise backend systems at{" "}
+                <span className="text-primary font-medium">Materialat</span> &
+                exploring 3D web experiences.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-wrap gap-4 mb-8"
+            >
+              <MagneticButton
+                onClick={() => scrollToSection("projects")}
+                className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium flex items-center gap-2 shadow-sm"
               >
                 View Projects
                 <ArrowRight size={20} />
-              </motion.button>
+              </MagneticButton>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('contact')}
-                className="px-8 py-3 bg-accent hover:bg-accent/80 text-accent-foreground rounded-lg font-medium border border-border backdrop-blur-sm transition-colors"
+              <MagneticButton
+                onClick={() => scrollToSection("contact")}
+                className="px-8 py-3 bg-transparent hover:bg-muted text-foreground rounded-lg font-medium border border-border transition-colors"
               >
                 Contact Me
-              </motion.button>
-            </div>
+              </MagneticButton>
+            </motion.div>
 
-            <div className="flex gap-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex gap-4"
+            >
               <motion.a
                 whileHover={{ scale: 1.1, y: -2 }}
                 href="https://github.com/ahmedAlnono"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-accent hover:bg-accent/80 rounded-lg border border-border transition-colors"
+                className="p-3 bg-muted hover:bg-border rounded-lg border border-border transition-colors"
               >
-                <Github size={24} />
+                <Github size={22} />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1, y: -2 }}
                 href="https://www.linkedin.com/in/ahmed-alnono-187b09251/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-accent hover:bg-accent/80 rounded-lg border border-border transition-colors"
+                className="p-3 bg-muted hover:bg-border rounded-lg border border-border transition-colors"
               >
-                <Linkedin size={24} />
+                <Linkedin size={22} />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1, y: -2 }}
                 href="mailto:ahmed.alnono.work@gmail.com"
-                className="p-3 bg-accent hover:bg-accent/80 rounded-lg border border-border transition-colors"
+                className="p-3 bg-muted hover:bg-border rounded-lg border border-border transition-colors"
               >
-                <Mail size={24} />
+                <Mail size={22} />
               </motion.a>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
+          {/* Right: contained 3D panel */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="hidden lg:flex items-center justify-center"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="hidden lg:block"
           >
-            <div className="relative w-full max-w-md aspect-square">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl opacity-20 blur-3xl" />
-
-              <div className="relative bg-card/50 backdrop-blur-xl rounded-2xl border border-border p-8 shadow-2xl">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-green-500">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-mono">system.online</span>
-                  </div>
-
-                  <div className="space-y-2 font-mono text-sm">
-                    <div className="text-muted-foreground">
-                      <span className="text-blue-500">const</span> developer = {'{'}
-                    </div>
-                    <div className="pl-4 text-muted-foreground">
-                      <span className="text-purple-500">name</span>: <span className="text-green-500">"Ahmed Alnono"</span>,
-                    </div>
-                    <div className="pl-4 text-muted-foreground">
-                      <span className="text-purple-500">role</span>: <span className="text-green-500">"Senior Full-Stack"</span>,
-                    </div>
-                    <div className="pl-4 text-muted-foreground">
-                      <span className="text-purple-500">focus</span>: [
-                    </div>
-                    <div className="pl-8 text-green-500">
-                      "Scalability",
-                    </div>
-                    <div className="pl-8 text-green-500">
-                      "Performance",
-                    </div>
-                    <div className="pl-8 text-green-500">
-                      "Architecture"
-                    </div>
-                    <div className="pl-4 text-muted-foreground">],</div>
-                    <div className="pl-4 text-muted-foreground">
-                      <span className="text-purple-500">status</span>: <span className="text-green-500">"available"</span>
-                    </div>
-                    <div className="text-muted-foreground">{'}'}</div>
-                  </div>
-
-                  <div className="pt-4 border-t border-border">
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 bg-accent rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: '85%' }}
-                          transition={{ duration: 1.5, delay: 0.5 }}
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-600"
-                        />
-                      </div>
-                      <span className="text-xs text-muted-foreground">85% match</span>
-                    </div>
-                  </div>
+            <div className="relative rounded-2xl border border-border bg-muted overflow-hidden">
+              <div className="relative h-[420px]">
+                <Suspense
+                  fallback={
+                    <div className="h-[420px] bg-muted animate-pulse rounded-2xl" />
+                  }
+                >
+                  <NetworkScene />
+                </Suspense>
+              </div>
+              <div className="border-t border-border bg-card px-6 py-4 flex items-center justify-between font-mono text-xs text-muted-foreground">
+                <span className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  live network
+                </span>
+                <div className="flex gap-4">
+                  <span>
+                    req/s{" "}
+                    <span className="text-foreground">
+                      {metrics.rps.toLocaleString()}
+                    </span>
+                  </span>
+                  <span>
+                    p99 <span className="text-foreground">{metrics.p99}ms</span>
+                  </span>
                 </div>
               </div>
             </div>

@@ -1,109 +1,63 @@
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
+import {
+  Code2,
+  Server,
+  Database,
+  Cloud,
+  Braces,
+  GitBranch,
+} from "lucide-react";
 
-const skills = [
+const skillCategories = [
   {
-    name: 'React',
-    category: 'Frontend',
-    level: 95,
-    color: 'from-cyan-500 to-blue-500',
+    name: "Frontend",
+    icon: Code2,
+    color: "from-blue-500/20 to-blue-500/5",
+    skills: [
+      { name: "React", level: 95 },
+      { name: "TypeScript", level: 95 },
+      { name: "Next.js", level: 90 },
+      { name: "Tailwind CSS", level: 90 },
+    ],
   },
   {
-    name: 'Next.js',
-    category: 'Frontend',
-    level: 90,
-    color: 'from-blue-500 to-indigo-500',
+    name: "Backend",
+    icon: Server,
+    color: "from-purple-500/20 to-purple-500/5",
+    skills: [
+      { name: ".NET Core", level: 90 },
+      { name: "Node.js", level: 85 },
+      { name: "GraphQL", level: 85 },
+      { name: "REST APIs", level: 95 },
+    ],
   },
   {
-    name: 'TypeScript',
-    category: 'Frontend',
-    level: 95,
-    color: 'from-blue-600 to-blue-400',
+    name: "Database",
+    icon: Database,
+    color: "from-emerald-500/20 to-emerald-500/5",
+    skills: [
+      { name: "PostgreSQL", level: 90 },
+      { name: "MongoDB", level: 85 },
+      { name: "Redis", level: 80 },
+      { name: "SQL", level: 90 },
+    ],
   },
   {
-    name: 'Tailwind CSS',
-    category: 'Frontend',
-    level: 90,
-    color: 'from-cyan-400 to-teal-500',
-  },
-  {
-    name: '.NET Core',
-    category: 'Backend',
-    level: 90,
-    color: 'from-purple-500 to-purple-700',
-  },
-  {
-    name: 'Node.js',
-    category: 'Backend',
-    level: 85,
-    color: 'from-green-500 to-green-700',
-  },
-  {
-    name: 'GraphQL',
-    category: 'Backend',
-    level: 85,
-    color: 'from-pink-500 to-purple-500',
-  },
-  {
-    name: 'REST APIs',
-    category: 'Backend',
-    level: 95,
-    color: 'from-orange-500 to-red-500',
-  },
-  {
-    name: 'PostgreSQL',
-    category: 'Database',
-    level: 90,
-    color: 'from-blue-600 to-blue-800',
-  },
-  {
-    name: 'MongoDB',
-    category: 'Database',
-    level: 85,
-    color: 'from-green-600 to-green-800',
-  },
-  {
-    name: 'Redis',
-    category: 'Database',
-    level: 80,
-    color: 'from-red-500 to-red-700',
-  },
-  {
-    name: 'SQL',
-    category: 'Database',
-    level: 90,
-    color: 'from-gray-500 to-gray-700',
-  },
-  {
-    name: 'Docker',
-    category: 'DevOps',
-    level: 90,
-    color: 'from-blue-500 to-blue-700',
-  },
-  {
-    name: 'Kubernetes',
-    category: 'DevOps',
-    level: 80,
-    color: 'from-blue-400 to-purple-600',
-  },
-  {
-    name: 'AWS',
-    category: 'DevOps',
-    level: 85,
-    color: 'from-orange-400 to-orange-600',
-  },
-  {
-    name: 'CI/CD',
-    category: 'DevOps',
-    level: 90,
-    color: 'from-teal-500 to-teal-700',
+    name: "DevOps & Cloud",
+    icon: Cloud,
+    color: "from-orange-500/20 to-orange-500/5",
+    skills: [
+      { name: "Docker", level: 90 },
+      { name: "Kubernetes", level: 80 },
+      { name: "AWS", level: 85 },
+      { name: "CI/CD", level: 90 },
+    ],
   },
 ];
 
-const categories = ['All', 'Frontend', 'Backend', 'Database', 'DevOps'];
-
 export function Skills() {
   return (
-    <section id="skills" className="py-24 bg-accent/20">
+    <section id="skills" className="py-24 bg-muted/40 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -112,47 +66,62 @@ export function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl mb-4">Technical Skills</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mb-6" />
+          <h2
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            className="text-4xl sm:text-5xl font-medium mb-4 text-foreground"
+          >
+            Technical Arsenal
+          </h2>
+          <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-6" />
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Specialized in building modern, scalable applications with cutting-edge technologies
+            A curated toolkit refined over 5+ years of building production
+            systems
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skills.map((skill, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {skillCategories.map((category, catIndex) => (
             <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, y: 20 }}
+              key={category.name}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="relative group"
+              transition={{ delay: catIndex * 0.1 }}
+              className={`relative bg-gradient-to-br ${category.color} backdrop-blur-sm border border-border rounded-2xl p-6 overflow-hidden group hover:border-primary/30 transition-colors`}
             >
-              <div className={`absolute -inset-1 bg-gradient-to-r ${skill.color} rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity`} />
-              <div className="relative bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6 h-full">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h4 className="mb-1">{skill.name}</h4>
-                    <span className="text-xs px-2 py-1 bg-accent rounded-full text-muted-foreground">
-                      {skill.category}
-                    </span>
-                  </div>
-                  <div className={`text-sm px-2 py-1 rounded bg-gradient-to-r ${skill.color} text-white`}>
-                    {skill.level}%
-                  </div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-lg bg-background/50 flex items-center justify-center">
+                  <category.icon className="w-5 h-5 text-primary" />
                 </div>
-
-                <div className="relative h-2 bg-accent rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: index * 0.05 }}
-                    className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
-                  />
-                </div>
+                <h3 className="text-xl font-medium text-foreground">
+                  {category.name}
+                </h3>
+              </div>
+              <div className="space-y-4">
+                {category.skills.map((skill, i) => (
+                  <div key={skill.name}>
+                    <div className="flex justify-between text-sm mb-1.5">
+                      <span className="text-foreground font-medium">
+                        {skill.name}
+                      </span>
+                      <span className="text-muted-foreground font-mono text-xs">
+                        {skill.level}%
+                      </span>
+                    </div>
+                    <div className="h-1.5 bg-background/50 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 1,
+                          delay: catIndex * 0.1 + i * 0.08,
+                        }}
+                        className="h-full bg-primary rounded-full"
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
           ))}
