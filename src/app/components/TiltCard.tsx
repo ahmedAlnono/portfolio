@@ -1,6 +1,6 @@
 // TiltCard.tsx
-import { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 export function TiltCard({
   children,
@@ -13,11 +13,28 @@ export function TiltCard({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), { stiffness: 300, damping: 30 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), { stiffness: 300, damping: 30 });
+  // 1. INCREASED ROTATION: Changed from 7 to 15 degrees for a much more noticeable tilt
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), {
+    stiffness: 300,
+    damping: 30,
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), {
+    stiffness: 300,
+    damping: 30,
+  });
 
-  const spotlightX = useTransform(mouseX, [-0.5, 0.5], ['0%', '100%']);
-  const spotlightY = useTransform(mouseY, [-0.5, 0.5], ['0%', '100%']);
+  // 2. ADDED POSITION CHANGE: Card now physically moves toward the cursor (8px range)
+  const translateX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
+    stiffness: 300,
+    damping: 30,
+  });
+  const translateY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-8, 8]), {
+    stiffness: 300,
+    damping: 30,
+  });
+
+  const spotlightX = useTransform(mouseX, [-0.5, 0.5], ["0%", "100%"]);
+  const spotlightY = useTransform(mouseY, [-0.5, 0.5], ["0%", "100%"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -36,7 +53,14 @@ export function TiltCard({
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 800 }}
+      style={{
+        rotateX,
+        rotateY,
+        x: translateX, // Applies the horizontal position shift
+        y: translateY, // Applies the vertical position shift
+        transformStyle: "preserve-3d",
+        transformPerspective: 800,
+      }}
       className={`relative ${className}`}
     >
       <motion.div
@@ -44,9 +68,10 @@ export function TiltCard({
         style={{
           background: useTransform(
             [spotlightX, spotlightY],
-            ([x, y]) => `radial-gradient(circle at ${x} ${y}, var(--primary) 0%, transparent 60%)`
+            ([x, y]) =>
+              `radial-gradient(circle at ${x} ${y}, var(--primary) 0%, transparent 60%)`,
           ),
-          opacity: 0.06,
+          opacity: 0.08, // Slightly increased from 0.06 for better visibility with the new movement
         }}
       />
       {children}

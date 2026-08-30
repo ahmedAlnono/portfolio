@@ -7,6 +7,7 @@ import {
   Braces,
   GitBranch,
 } from "lucide-react";
+import { TiltCard } from "./TiltCard";
 
 const skillCategories = [
   {
@@ -81,49 +82,51 @@ export function Skills() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {skillCategories.map((category, catIndex) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: catIndex * 0.1 }}
-              className={`relative bg-gradient-to-br ${category.color} backdrop-blur-sm border border-border rounded-2xl p-6 overflow-hidden group hover:border-primary/30 transition-colors`}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-background/50 flex items-center justify-center">
-                  <category.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-medium text-foreground">
-                  {category.name}
-                </h3>
-              </div>
-              <div className="space-y-4">
-                {category.skills.map((skill, i) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between text-sm mb-1.5">
-                      <span className="text-foreground font-medium">
-                        {skill.name}
-                      </span>
-                      <span className="text-muted-foreground font-mono text-xs">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="h-1.5 bg-background/50 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 1,
-                          delay: catIndex * 0.1 + i * 0.08,
-                        }}
-                        className="h-full bg-primary rounded-full"
-                      />
-                    </div>
+            <TiltCard>
+              <motion.div
+                key={category.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: catIndex * 0.1 }}
+                className={`relative bg-gradient-to-br ${category.color} backdrop-blur-sm border border-border rounded-2xl p-6 overflow-hidden group hover:border-primary/30 transition-colors`}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-lg bg-background/50 flex items-center justify-center">
+                    <category.icon className="w-5 h-5 text-primary" />
                   </div>
-                ))}
-              </div>
-            </motion.div>
+                  <h3 className="text-xl font-medium text-foreground">
+                    {category.name}
+                  </h3>
+                </div>
+                <div className="space-y-4">
+                  {category.skills.map((skill, i) => (
+                    <div key={skill.name}>
+                      <div className="flex justify-between text-sm mb-1.5">
+                        <span className="text-foreground font-medium">
+                          {skill.name}
+                        </span>
+                        <span className="text-muted-foreground font-mono text-xs">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <div className="h-1.5 bg-background/50 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{
+                            duration: 1,
+                            delay: catIndex * 0.1 + i * 0.08,
+                          }}
+                          className="h-full bg-primary rounded-full"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </TiltCard>
           ))}
         </div>
       </div>

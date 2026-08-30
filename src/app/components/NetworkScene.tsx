@@ -221,7 +221,7 @@ export function NetworkScene() {
     <Canvas
       camera={{ position: [0, 0, 6], fov: 45 }}
       gl={{ antialias: true, alpha: true }}
-      style={{ position: "absolute", inset: 0 }}
+      style={{ width: "100%", height: "100%" }}
     >
       <Scene />
     </Canvas>

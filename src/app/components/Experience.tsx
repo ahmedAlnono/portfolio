@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Briefcase, TrendingUp } from "lucide-react";
+import { TiltCard } from "./TiltCard";
 
 const experiences = [
   {
@@ -95,53 +96,57 @@ export function Experience() {
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.company}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="relative"
-              >
-                <div className="absolute left-8 top-8 w-3 h-3 rounded-full bg-primary border-4 border-background hidden md:block -translate-x-1/2" />
+              <TiltCard>
+                <motion.div
+                  key={exp.company}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15 }}
+                  className="relative"
+                >
+                  <div className="absolute left-8 top-8 w-3 h-3 rounded-full bg-primary border-4 border-background hidden md:block -translate-x-1/2" />
 
-                <motion.div whileHover={{ x: 4 }} className="md:ml-16">
-                  <div className="bg-card border border-border rounded-2xl p-8">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <Briefcase className="w-5 h-5 text-primary" />
+                  <motion.div whileHover={{ x: 4 }} className="md:ml-16">
+                    <div className="bg-card border border-border rounded-2xl p-8">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <Briefcase className="w-5 h-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="text-xl text-foreground font-medium">
+                              {exp.role}
+                            </h3>
+                            <p className="text-muted-foreground">
+                              {exp.company}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl text-foreground font-medium">
-                            {exp.role}
-                          </h3>
-                          <p className="text-muted-foreground">{exp.company}</p>
+                        <div className="flex flex-col sm:items-end gap-2">
+                          <span className="text-sm text-muted-foreground">
+                            {exp.duration}
+                          </span>
+                          <span className="text-xs px-3 py-1 bg-muted rounded-full text-muted-foreground border border-border w-fit">
+                            {exp.type}
+                          </span>
                         </div>
                       </div>
-                      <div className="flex flex-col sm:items-end gap-2">
-                        <span className="text-sm text-muted-foreground">
-                          {exp.duration}
-                        </span>
-                        <span className="text-xs px-3 py-1 bg-muted rounded-full text-muted-foreground border border-border w-fit">
-                          {exp.type}
-                        </span>
+
+                      <div className="space-y-3">
+                        {exp.achievements.map((achievement, i) => (
+                          <div key={i} className="flex gap-3">
+                            <TrendingUp className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
+                            <p className="text-muted-foreground text-sm">
+                              {achievement}
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
-
-                    <div className="space-y-3">
-                      {exp.achievements.map((achievement, i) => (
-                        <div key={i} className="flex gap-3">
-                          <TrendingUp className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
-                          <p className="text-muted-foreground text-sm">
-                            {achievement}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>

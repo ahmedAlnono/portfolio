@@ -11,7 +11,7 @@ import { CursorPing } from "./components/CursorPing";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { TechMarquee } from "./components/TechMarquee";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,7 +33,7 @@ export default function App() {
 
         <main>
           <Hero />
-          <TechMarquee />
+          {/* <TechMarquee /> */}
           <About />
           <Skills />
           <Projects />
