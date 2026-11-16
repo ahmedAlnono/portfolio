@@ -28,7 +28,6 @@ export default function App() {
     >
       <div className="min-h-screen bg-background text-foreground">
         <ScrollProgress />
-        <Navigation />
         <CursorPing />
 
         <main>
